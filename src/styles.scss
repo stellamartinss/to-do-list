@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+$lime-green: #32CD30;
+$green: #2C5E1A;
+$forest-green: #1A4314;
+$seafoam-green: #B2D2A4;
+$white: #ffffff;
+$light-grey: #f2f2f2;
+$mid-grey: #cccccc;
+$dark-grey: #999999;
+$black: #000000;
+
+body.mat-typography {
+  background-color: $forest-green;
+}
+
+.done .mat-checkbox-label {
+  text-decoration: line-through;
+}
+
+

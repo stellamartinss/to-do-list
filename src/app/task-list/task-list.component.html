@@ -1,0 +1,56 @@
+<section class="mt-5">
+  <h1>Tasks</h1>
+  <div *ngFor="let task of tasks">
+    <mat-card
+      *ngIf="taskToEdit.id !== task.id"
+      [class]="{ done: task.completed }"
+      class="mb-2"
+    >
+      <div class="row">
+        <div class="col-11">
+          <mat-checkbox
+            class="example-margin"
+            [checked]="task.checked"
+            (click)="toggleTask(task)"
+            >{{ task.title }}</mat-checkbox
+          >
+        </div>
+        <div class="col-1">
+          <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon (click)="toggleEditTaskForm(task)">edit</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon (click)="toggleEditTaskForm(task)">edit</mat-icon>
+            </button>
+            <button mat-menu-item>
+              <mat-icon (click)="toggleEditTaskForm(task)">close</mat-icon>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </mat-card>
+    <app-task-form
+      *ngIf="taskToEdit.id === task.id"
+      [task]="task"
+      [tasks]="tasks"
+      (editTask)="editTask($event)"
+      (toggleEditTaskForm)="toggleEditTaskForm($event)"
+    ></app-task-form>
+  </div>
+  <div class="mt-3">
+    <app-task-form
+      *ngIf="showAddTaskForm"
+      [tasks]="tasks"
+      (addTask)="addTask($event)"
+      (toggleAddTaskForm)="toggleAddTaskForm()"
+    ></app-task-form>
+    <button
+      class="btn btn-light w-100"
+      (click)="toggleAddTaskForm()"
+      *ngIf="!showAddTaskForm"
+    >
+      + Add task
+    </button>
+  </div>
+</section>

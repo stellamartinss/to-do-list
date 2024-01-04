@@ -1,0 +1,14 @@
+<mat-card class="mb-3">
+  <mat-card-content>
+    <input type="text" placeholder="What task comes next?" [(ngModel)]="title" class="w-100" />
+  </mat-card-content>
+
+  <div class="row d-flex justify-content-end">
+    <div class="col-md-2">
+      <button class="btn btn-light w-100" (click)="cancel()">Cancel</button>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-success w-100" (click)="save()">Save</button>
+    </div>
+  </div>
+</mat-card>
