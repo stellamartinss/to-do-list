@@ -16,15 +16,14 @@
           >
         </div>
         <div class="col-1">
-          <button mat-button [matMenuTriggerFor]="menu">
-            <mat-icon (click)="toggleEditTaskForm(task)">edit</mat-icon>
-          </button>
+          <mat-icon mat-button [matMenuTriggerFor]="menu">more_vert</mat-icon>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-              <mat-icon (click)="toggleEditTaskForm(task)">edit</mat-icon>
+            <button (click)="toggleEditTaskForm(task)" mat-menu-item>
+              <mat-icon>edit</mat-icon> Edit
             </button>
-            <button mat-menu-item>
-              <mat-icon (click)="toggleEditTaskForm(task)">close</mat-icon>
+            <button (click)="removeTask(task)" mat-menu-item>
+              <mat-icon>close</mat-icon>
+              Remove
             </button>
           </mat-menu>
         </div>

@@ -76,4 +76,8 @@ export class TaskListComponent implements OnInit {
 
     this.toggleEditTaskForm()
   }
+
+  removeTask(task: Task) {
+    this.tasks = this.tasks.filter(item => item.id !== task.id)
+  }
 }
