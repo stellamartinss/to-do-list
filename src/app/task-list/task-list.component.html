@@ -1,5 +1,19 @@
 <section class="mt-5">
   <h1>Tasks</h1>
+  <div
+    class="alert alert-danger alert-dismissible fade show"
+    role="alert"
+    *ngFor="let error of errorList"
+  >
+    <div class="row">
+      <div class="col-11">
+        {{ error.message }}
+      </div>
+      <div class="col-1">
+        <span aria-hidden="true" (click)="closeError(error)">&times;</span>
+      </div>
+    </div>
+  </div>
   <div *ngFor="let task of tasks">
     <mat-card
       *ngIf="taskToEdit.id !== task.id"

@@ -52,8 +52,6 @@ export class TaskFormComponent implements OnInit, OnChanges {
     };
 
     this.addTask.emit(task);
-
-    console.log(this.tasks)
   }
 
   edit() {

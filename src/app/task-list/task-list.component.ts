@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../models/task';
+import { TasksService } from '../services/tasks.service';
+import { Error } from '../models/error';
 
 @Component({
   selector: 'app-task-list',
@@ -15,15 +17,22 @@ export class TaskListComponent implements OnInit {
     checked: false,
   };
 
-  tasks: Task[] = [
-    { id: 1, title: 'Buy groceries', completed: false, checked: false },
-    { id: 2, title: 'Write Angular tutorial', completed: true, checked: true },
-    { id: 3, title: 'Walk the dog', completed: false, checked: false },
-  ];
+  tasks: Task[] = [];
+  errorList: Error[] = []
 
-  constructor() {}
+  constructor(private taskService: TasksService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getAllTasks()
+  }
+
+  getAllTasks(): void {
+    this.taskService.getAllTasks().subscribe((tasks) => {
+      this.tasks = tasks
+    }, error => {
+      this.addError(error)
+    })
+  }
 
   toggleTask(task: Task) {
     this.toggleAddTaskForm('close');
@@ -61,23 +70,36 @@ export class TaskListComponent implements OnInit {
 
   addTask(task: Task) {
     if (task.title !== '') {
-      this.tasks.push(task);
+      this.taskService.createTask(task).subscribe(async (response) => {
+        this.tasks = await this.taskService.getAllTasks().toPromise()
+      }, error => {
+        this.addError(error)
+      })
     }
 
     this.toggleAddTaskForm()
   }
 
   editTask(task: Task) {
-    this.tasks.map((item) => {
-      if (item.id == task.id) {
-        item = task;
-      }
-    });
+
+    this.taskService.editTask(task).subscribe(async (response) => {
+      this.tasks = await this.taskService.getAllTasks().toPromise()
+    })
 
     this.toggleEditTaskForm()
   }
 
   removeTask(task: Task) {
-    this.tasks = this.tasks.filter(item => item.id !== task.id)
+    this.taskService.deleteTask(task.id).subscribe(async (response) => {
+      this.tasks = await this.taskService.getAllTasks().toPromise()
+    })
+  }
+
+  addError(error: any): void {
+    this.errorList.push({id: this.errorList.length + 1, message: error.error.error, open: true})
+  }
+
+  closeError(error: Error): void {
+    this.errorList = this.errorList.filter(item => item.id !== error.id)
   }
 }
