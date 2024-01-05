@@ -38,11 +38,10 @@ export class TaskListComponent implements OnInit {
     this.toggleAddTaskForm('close');
     this.toggleEditTaskForm()
 
-    this.tasks.map((item) => {
-      if (item.id == task.id) {
-        item.completed = !item.completed;
-      }
-    });
+    task.completed = !task.completed
+    this.taskService.editTask(task).subscribe(async response => {
+      this.tasks = await this.taskService.getAllTasks().toPromise()
+    })
   }
 
   toggleAddTaskForm(open?: string): void {
