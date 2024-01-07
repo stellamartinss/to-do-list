@@ -26,18 +26,22 @@ export class TasksService {
   }
 
   getAllTasks(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/list-tasks`, this.headers);
+    const headers = this.getRequestHeaders();
+    return this.http.get(`${this.baseUrl}/list-tasks`, {headers});
   }
 
   createTask(taskData: Task): Observable<any> {
-    return this.http.post(`${this.baseUrl}/create-task`, taskData, this.headers);
+    const headers = this.getRequestHeaders();
+    return this.http.post(`${this.baseUrl}/create-task`, taskData, {headers});
   }
 
   editTask(taskData: Task): Observable<any> {
-    return this.http.put(`${this.baseUrl}/edit-task/${taskData.id}`, taskData, this.headers);
+    const headers = this.getRequestHeaders();
+    return this.http.put(`${this.baseUrl}/edit-task/${taskData.id}`, taskData, {headers});
   }
 
   deleteTask(taskId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/delete-task/${taskId}`, this.headers);
+    const headers = this.getRequestHeaders();
+    return this.http.delete(`${this.baseUrl}/delete-task/${taskId}`, {headers});
   }
 }

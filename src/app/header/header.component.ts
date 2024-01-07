@@ -31,13 +31,7 @@ export class HeaderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(async (result) => {
-      this.token = this.authService.getToken();
-
-      this.userService.getUserData().subscribe((result) => {
-          this.user = result;
-          this.checkToken.emit();
-
-      });
+     this.getUserData(result)
     });
   }
 
@@ -47,12 +41,18 @@ export class HeaderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.token = this.authService.getToken();
+      this.getUserData(result);
+    });
+  }
 
-      this.userService.getUserData().subscribe((result) => {
-          this.user = result;
-          this.checkToken.emit();
-      });
+  getUserData(result: any): void {
+    this.token = result.token;
+    localStorage.setItem('token', result.token);
+    console.log(result.token);
+
+    this.userService.getUserData().subscribe((result) => {
+      this.user = result;
+      this.checkToken.emit();
     });
   }
 

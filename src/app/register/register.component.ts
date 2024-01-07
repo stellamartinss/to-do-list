@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
     this.authService.register(this.auth).subscribe(
       (response) => {
         localStorage.setItem('token', response.token);
-        this.dialogRef.close({ saved: true });
+        this.dialogRef.close({ saved: true, token: response.token });
       },
       (error) => {
         this.error = { message: error.error.error, open: true };

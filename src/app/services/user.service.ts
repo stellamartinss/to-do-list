@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   private baseUrl = 'http://localhost:3000/user';
@@ -25,6 +25,7 @@ export class UserService {
   }
 
   getUserData(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/get-user-profile`, this.headers);
+    const headers = this.getRequestHeaders();
+    return this.http.get(`${this.baseUrl}/get-user-profile`, { headers });
   }
 }
