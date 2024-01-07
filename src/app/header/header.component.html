@@ -1,0 +1,30 @@
+<section class="mt-2">
+  <div class="row">
+    <div class="col-4 col-sm-2" *ngIf="!this.token">
+      <button class="btn btn-outline-light" (click)="openRegisterDialog()">
+        Register
+      </button>
+    </div>
+    <div class="col-4 col-sm-2" *ngIf="!this.token">
+      <button class="btn btn-light" (click)="openLoginDialog()">Login</button>
+    </div>
+    <div
+      class="col-12 col-sm-12 d-flex justify-content-between"
+      *ngIf="this.token"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <h4 class="text-white">Hello, {{user.username}}!</h4>
+          </div>
+          <div class="col-6 d-flex justify-content-end">
+            <button class="btn btn-outline-light" (click)="onLogout()">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mt-5" *ngIf="!this.token">
+      <h1 class="text-white">Hello, login to see your tasks</h1>
+    </div>
+  </div>
+</section>

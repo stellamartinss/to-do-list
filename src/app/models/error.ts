@@ -1,5 +1,5 @@
 export interface Error {
-  id: number,
+  id?: number,
   message: string,
   open: boolean
 }

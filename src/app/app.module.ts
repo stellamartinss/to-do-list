@@ -12,15 +12,21 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './login/login.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskListComponent,
-    TaskFormComponent
+    TaskFormComponent,
+    HeaderComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,9 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     MatIconModule,
     MatMenuModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFormFieldModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

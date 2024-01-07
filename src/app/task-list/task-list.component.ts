@@ -16,6 +16,7 @@ export class TaskListComponent implements OnInit {
     completed: false,
     checked: false,
   };
+  message = ''
 
   tasks: Task[] = [];
   errorList: Error[] = []
@@ -28,6 +29,9 @@ export class TaskListComponent implements OnInit {
 
   getAllTasks(): void {
     this.taskService.getAllTasks().subscribe((tasks) => {
+      if(tasks.length === 0) {
+        this.message = 'Nothing to display! If you login you can see your tasks'
+      }
       this.tasks = tasks
     }, error => {
       this.addError(error)
