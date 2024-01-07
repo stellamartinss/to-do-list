@@ -23,7 +23,12 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const token = this.authService.getToken();
+    if (token) {
+      this.getUserData({token: token});
+    }
+  }
 
   openLoginDialog(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
@@ -31,7 +36,7 @@ export class HeaderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(async (result) => {
-     this.getUserData(result)
+      this.getUserData(result);
     });
   }
 
