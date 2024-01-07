@@ -49,6 +49,3 @@ This will start the development server, and you can access the project at http:/
 
 Feel free to contribute to this project by opening issues or creating pull requests. Follow the project's coding style and guidelines.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE.md).
