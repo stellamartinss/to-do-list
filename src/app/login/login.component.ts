@@ -34,10 +34,7 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     this.authService.login(this.auth).subscribe(
       async (response) => {
-        console.log(response)
         localStorage.setItem('token', response.token)
-
-        console.log(response)
         this.dialogRef.close({ saved: true, token: response.token });
       },
       (error) => {

@@ -53,7 +53,6 @@ export class HeaderComponent implements OnInit {
   getUserData(result: any): void {
     this.token = result.token;
     localStorage.setItem('token', result.token);
-    console.log(result.token);
 
     this.userService.getUserData().subscribe((result) => {
       this.user = result;
