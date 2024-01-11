@@ -20,6 +20,7 @@ export class TaskListComponent implements OnInit {
 
   tasks: Task[] = [];
   errorList: Error[] = []
+  tasksBackup: Task[] = []
 
   constructor(private taskService: TasksService) {}
 
@@ -32,7 +33,10 @@ export class TaskListComponent implements OnInit {
       if(tasks.length === 0) {
         this.message = 'Nothing to display! If you login you can see your tasks'
       }
+
       this.tasks = tasks
+      this.tasksBackup = this.tasks
+
     }, error => {
       this.addError(error)
     })
@@ -105,4 +109,14 @@ export class TaskListComponent implements OnInit {
   closeError(error: Error): void {
     this.errorList = this.errorList.filter(item => item.id !== error.id)
   }
+
+  toggleFilter(status?: string) {
+
+    this.tasks = this.tasksBackup
+
+    if(!status) return
+
+    this.tasks = this.tasks.filter(item => status === 'complete' ? item.completed : !item.completed)
+  }
+
 }
